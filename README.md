@@ -1,5 +1,5 @@
 # Wordle-like Solver
-Provides a list of possible answers for wordle-like games based on a set of floating and fixed letters.
+A simple python-based GUI application that gives possible answers given a list of floating, fixed and wrong letters.
 
 ## Description
 The solver takes in a set of floating (correct letter, unknown position) and fixed (correct letter, known position) letters and creates a list of possible words that fit that criteria. The program is customizable to allow any set of words of any length by setting up a word list file.
@@ -11,8 +11,10 @@ A relatively recent version of Python 3. (Download it here: https://www.python.o
 ### Regarding the Word List
 
 ### [IMPORTANT] Word List Details
-The current word list stored in words.txt only contains 5 letter words. Thus, when changing the number of letters to use, either supply your own word list, or utilize the generic english mode (which might take longer/use more memory).
-### Command Line Version
+The current word list stored in words.txt only contains 5 letter words and are the words Wordle uses for its answers. Thus, when changing the number of letters to use, either supply your own word list, or utilize the generic english mode (which might take longer/use more memory).
+### Using the Command Line Version
+Please note that you will have to re-run the command-line version every time you want to use it.
+
 The program should run with the following commands:
 ```
 python solver-cli.py [flags] [arguments]
