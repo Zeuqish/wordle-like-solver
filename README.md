@@ -5,8 +5,7 @@ A simple python-based GUI application that gives possible answers given a list o
 The solver takes in a set of floating (correct letter, unknown position) and fixed (correct letter, known position) letters and creates a list of possible words that fit that criteria. The program is customizable to allow any set of words of any length by setting up a word list file.
 
 ## Requirements
-A recent version of Python 3. (Download it here: https://www.python.org/downloads/)
-
+A recent version of Python 3 (Download it here: https://www.python.org/downloads/). Make sure to install Tkinter during installation if you want to use the GUI version.
 ## Usage
 ### Regarding the Word List
 
