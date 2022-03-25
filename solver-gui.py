@@ -7,7 +7,7 @@ def set_grid(element, row, column, sticky, padx, pady):
 
 class Entry_Element():
     def __init__(self, master, width, content):
-        self.element = tk.Entry(master, width = width, textvariable = content)
+        self.element = tk.Entry(master, width = width, textvariable = content, )
 
 class Button_Element():
     def init_button(self, master, text, command, padx, pady):
@@ -42,25 +42,34 @@ class Frame():
             # a bit hacky, but this works.
             import re
             word_list = []
+            fixed_letter_input = fixed_letters.get()
+            floating_letters_input = floating_letters.get()
 
+            #Clear the answers field
             text_area.text_elem.element.delete(1.0, 'end')
 
             with open("words.txt", 'r') as final_word_list:
                 word_list = final_word_list.readlines()
+
+            word_len = len(word_list[0]) #get length of first word in word list. This assumes all words have same length.
+
+            #Validate Answers
+            if (len(fixed_letter_input) == 0):
+                text_area.text_elem.element.insert('end', "[NOTE] Fixed letters empty. Assuming no fixed letters. \n")
+            if (((len(fixed_letter_input) != word_len and len(fixed_letter_input) != 0) or len(floating_letters_input) > word_len)):
+                text_area.text_elem.element.insert('end', "[ERROR] Recheck the lengths of your letters. \n")
+
+
             #First do the fixed letters. If fixed is empty, we do nothing and proceed to floating.
-
-            if ((len(fixed_letters.get()) != 5 or len(floating_letters.get()) > 5)):
-                text_area.text_elem.element.insert('end', "[ERROR] Recheck the lengths of your letters.")
-
             if fixed_letters:
-                fixed = fixed_letters.get().replace("*",".")
+                fixed = fixed_letter_input.replace("*",".")
                 pattern = re.compile(fixed)
                 word_list = list(filter(pattern.match,word_list))
             
             #From word_list, we now have to make sure that ALL our floating characters exist for each word. Current implementation means keeping only words with a specific letter
             #in a loop.
             if floating_letters:
-                for character in floating_letters.get():
+                for character in floating_letters_input:
                     pattern = re.compile(character)
                     word_list = list(filter(pattern.search,word_list))
 
@@ -100,10 +109,10 @@ class Frame():
         set_grid(solve_button.button_elem, 3, 1, 'n', 10, 3)
 
         text_area = Text_Scrollbar_Element(self.frame, 40, 5, 'vertical')
-        set_grid(text_area.text_elem.element, 0, 2, 'nwes', 0, 3)
+        set_grid(text_area.text_elem.element, 0, 2, tk.N + tk.S, 0, 3)
         text_area.text_elem.element.grid(rowspan = 3)
-        set_grid(text_area.scroll_elem.element, 0, 3, 'nwes', 0, 3)
-        text_area.scroll_elem.element.grid(rowspan=3)
+        set_grid(text_area.scroll_elem.element, 0, 3, 'ns', 0, 3)
+        text_area.scroll_elem.element.grid(rowspan = 3)
 
 class MainWindow():
     def __init__(self) -> None:
